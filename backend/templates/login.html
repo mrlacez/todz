@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login - Auto Paintworks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+</head>
+<body>
+    <div class="login-page">
+        <div class="login-overlay"></div>
+
+        <div class="login-shell">
+            <div class="login-brand">
+                
+                <div class="brand-text">
+                    <h2>Elite Auto Paintworks</h2>
+                    <p>Premium Admin Access</p>
+                </div>
+            </div>
+
+            <div class="login-card">
+                <div class="card-topline"></div>
+
+                <div class="logo-wrap">
+                    
+                </div>
+
+                <h1>Welcome Back</h1>
+                <p class="subtitle">Login to access your premium admin dashboard.</p>
+
+                <form id="loginForm" novalidate>
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-wrap">
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your admin email"
+                                autocomplete="email"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrap">
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <button type="submit" id="loginBtn">Login to Dashboard</button>
+                    <p id="errorMessage" class="error-message"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>

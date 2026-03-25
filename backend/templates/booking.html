@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Appointment | JC Monsanto Auto Paintworks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">JC Monsanto Auto Paintworks</div>
+
+        <button class="menu-btn" id="menuBtn" type="button">☰</button>
+
+        <nav id="navLinks">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('services') }}">Services</a>
+            <a href="{{ url_for('gallery') }}">Gallery</a>
+            <a href="{{ url_for('booking') }}" class="active">Book</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('login') }}" class="admin-link">Admin</a>
+        </nav>
+    </header>
+
+    <main class="page-wrapper">
+
+        <section class="hero-section small-hero">
+            <div class="hero-card">
+                <div class="hero-badge">Book Your Service</div>
+                <h1>Schedule an Appointment</h1>
+                <p>
+                    Fill in your details below and submit your booking request for repaint,
+                    repair, or restoration services.
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Booking Form</h2>
+                <p>Send us your appointment request and we'll review it as soon as possible.</p>
+            </div>
+
+            <div class="form-card booking-form-wrap">
+                <form id="bookingForm" class="pro-form">
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Enter your full name"
+                                required
+                                minlength="2"
+                                maxlength="60"
+                                pattern="[A-Za-z][A-Za-z .'-]{1,59}"
+                                title="Full name can contain letters, spaces, dot, apostrophe, and hyphen only."
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="Enter your phone number"
+                                required
+                                minlength="11"
+                                maxlength="11"
+                                pattern="09[0-9]{9}"
+                                title="Phone number must be 11 digits and start with 09."
+                                inputmode="numeric"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="vehicle">Vehicle Type</label>
+                            <select id="vehicle" name="vehicle" required>
+                                <option value="">Select vehicle type</option>
+                                <option value="Car">Car</option>
+                                <option value="Motorcycle">Motorcycle</option>
+                                <option value="SUV">SUV</option>
+                                <option value="Van">Van</option>
+                                <option value="Pickup">Pickup</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Service Needed</label>
+                            <select id="service" name="service" required>
+                                <option value="">Select service</option>
+                                <option value="Full Body Repaint">Full Body Repaint</option>
+                                <option value="Scratch Repair">Scratch Repair</option>
+                                <option value="Panel Retouch">Panel Retouch</option>
+                                <option value="Bumper Repair">Bumper Repair</option>
+                                <option value="Motorcycle Repaint">Motorcycle Repaint</option>
+                                <option value="Color Restoration">Color Restoration</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="date">Preferred Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="message">Additional Details</label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="6"
+                                placeholder="Tell us about your vehicle concern, paint issue, scratches, dents, or preferred service..."
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Submit Booking</button>
+                        <button type="reset" class="btn btn-secondary">Clear Form</button>
+                    </div>
+
+                    <div id="bookingMessage" class="form-message"></div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 JC Monsanto Auto Paintworks. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/bookings.js') }}"></script>
+</body>
+</html>

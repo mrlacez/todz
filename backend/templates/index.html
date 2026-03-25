@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JC Monsanto Auto Paintworks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">JC Monsanto Auto Paintworks</div>
+
+        <button class="menu-btn" id="menuBtn">☰</button>
+
+        <nav id="navLinks">
+            <a href="{{ url_for('index') }}" class="active">Home</a>
+            <a href="{{ url_for('services') }}">Services</a>
+            <a href="{{ url_for('gallery') }}">Gallery</a>
+            <a href="{{ url_for('booking') }}">Book</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('login') }}" class="admin-link">Admin</a>
+        </nav>
+    </header>
+
+    <main class="page-wrapper">
+
+        <section class="hero-section">
+            <div class="hero-card">
+                <div class="hero-badge">Professional Auto Paint & Repair</div>
+                <h1>JC Monsanto Auto Paintworks</h1>
+                <p>
+                    Professional car and motorcycle repainting services with premium finish,
+                    reliable workmanship, and a clean modern booking experience.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="{{ url_for('booking') }}" class="btn btn-primary">Book Appointment</a>
+                    <a href="{{ url_for('services') }}" class="btn btn-secondary">Explore Services</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Why Choose Us</h2>
+                <p>Trusted workmanship with the same premium visual style as your admin dashboard.</p>
+            </div>
+
+            <div class="card-grid three-cols">
+                <div class="info-card accent-card">
+                    <h3>Premium Paint Finish</h3>
+                    <p>We deliver smooth, durable, and high-quality repainting results for every vehicle.</p>
+                </div>
+
+                <div class="info-card accent-card">
+                    <h3>Skilled Technicians</h3>
+                    <p>Experienced experts for full repaint, scratches, touch-ups, detailing, and restoration.</p>
+                </div>
+
+                <div class="info-card accent-card">
+                    <h3>Fast Turnaround</h3>
+                    <p>Reliable service with efficient booking flow, organized updates, and clear communication.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Featured Services</h2>
+                <p>Popular services available at JC Monsanto Auto Paintworks.</p>
+            </div>
+
+            <div class="card-grid three-cols">
+                <div class="info-card">
+                    <h3>Full Repaint</h3>
+                    <p>Complete repainting service for a fresh, bold, and restored showroom-quality finish.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Scratch Repair</h3>
+                    <p>Fix visible scratches and damaged paint surfaces with professional refinishing work.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Panel Retouch</h3>
+                    <p>Restore specific vehicle panels without repainting the entire body.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="cta-card">
+                <h2>Ready to restore your vehicle?</h2>
+                <p>
+                    Book your appointment today and let JC Monsanto Auto Paintworks
+                    handle the finish professionally.
+                </p>
+                <a href="{{ url_for('booking') }}" class="btn btn-primary">Book Now</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 JC Monsanto Auto Paintworks. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

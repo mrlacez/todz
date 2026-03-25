@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Auto Paintworks</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <aside id="sidebar" class="sidebar collapsed">
+            <div class="logo">
+                <i class="fa-solid fa-car"></i>
+                <span>Paintworks</span>
+            </div>
+
+            <ul class="menu">
+                <li class="active">
+                    <a href="javascript:void(0)" data-section="dashboard">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)" data-section="bookings">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Bookings</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)" data-section="customers">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Customers</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)" data-section="services">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        <span>Services</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)" data-section="gallery">
+                        <i class="fa-solid fa-image"></i>
+                        <span>Gallery</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)" id="logoutBtn">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        <div id="overlay" class="overlay"></div>
+
+        <main class="main">
+            <header class="topbar">
+                <button id="menuToggle" class="icon-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="topbar-right">
+                    <button class="icon-btn"><i class="fa-solid fa-bell"></i></button>
+                    <button id="themeToggle" class="icon-btn"><i class="fa-solid fa-moon"></i></button>
+                </div>
+            </header>
+
+            <section id="dashboard" class="content-section active">
+                <div class="page-header">
+                    <h1>Dashboard</h1>
+                    <p>Realtime business overview.</p>
+                </div>
+
+                <div class="booking-stats">
+                    <div class="stat-card"><h3>Total Bookings</h3><p id="dashboardTotalBookings">0</p></div>
+                    <div class="stat-card"><h3>Pending</h3><p id="dashboardPendingBookings">0</p></div>
+                    <div class="stat-card"><h3>Approved</h3><p id="dashboardApprovedBookings">0</p></div>
+                    <div class="stat-card"><h3>Completed</h3><p id="dashboardCompletedBookings">0</p></div>
+                </div>
+            </section>
+
+            <section id="bookings" class="content-section">
+                <div class="page-header">
+                    <h1>Bookings</h1>
+                    <p>Realtime booking management.</p>
+                </div>
+
+                <div class="booking-stats">
+                    <div class="stat-card">
+                        <h3>Total Bookings</h3>
+                        <p id="totalBookings">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Pending</h3>
+                        <p id="pendingBookings">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Approved</h3>
+                        <p id="approvedBookings">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Completed</h3>
+                        <p id="completedBookings">0</p>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Bookings Table</h3>
+                    </div>
+
+                    <div class="toolbar">
+                        <input type="text" id="bookingSearch" placeholder="Search name, phone, vehicle" />
+                        <select id="statusFilter">
+                            <option value="">All Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                        <button id="clearBookingSearch" class="primary-btn">Clear</button>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Phone</th>
+                                    <th>Vehicle</th>
+                                    <th>Service</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Message</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookingsContainer">
+                                <tr class="table-row">
+                                    <td class="customer-cell">
+                                        <strong>${name}</strong>
+                                    </td>
+
+                                    <td>${phone}</td>
+
+                                    <td>
+                                        <span class="badge vehicle">${vehicle}</span>
+                                    </td>
+
+                                    <td>${service}</td>
+
+                                    <td>${date}</td>
+
+                                    <td>
+                                        <span class="status-badge ${status.toLowerCase()}">${status}</span>
+                                    </td>
+
+                                    <td class="message-cell">${message}</td>
+
+                                    <td>
+                                        <div class="action-group">
+                                        <button class="action-btn edit"><i class="fa-solid fa-pen"></i></button>
+                                        <button class="action-btn approve"><i class="fa-solid fa-check"></i></button>
+                                        <button class="action-btn complete"><i class="fa-solid fa-circle-check"></i></button>
+                                        <button class="action-btn delete"><i class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="customers" class="content-section">
+                <div class="page-header">
+                    <h1>Customers</h1>
+                    <p>Manage customer records.</p>
+                </div>
+
+                <div class="form-card">
+                    <h3>Add Customer</h3>
+                    <div class="form-grid">
+                        <input type="text" id="customerName" placeholder="Customer name">
+                        <input type="text" id="customerPhone" placeholder="Phone">
+                        <input type="email" id="customerEmail" placeholder="Email">
+                        <input type="text" id="customerVehicle" placeholder="Vehicle">
+                        <textarea id="customerAddress" placeholder="Address"></textarea>
+                    </div>
+                    <button id="addCustomerBtn" class="primary-btn">Add Customer</button>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Customers Table</h3>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Vehicle</th>
+                                    <th>Address</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="customersContainer">
+                                <tr>
+                                    <td colspan="6" class="empty-state">
+                                        No customers found.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="services" class="content-section">
+                <div class="page-header">
+                    <h1>Services</h1>
+                    <p>Manage service catalog.</p>
+                </div>
+
+                <div class="form-card">
+                    <h3>Add Service</h3>
+                    <div class="form-grid">
+                        <input type="text" id="serviceName" placeholder="Service name">
+                        <input type="number" id="servicePrice" placeholder="Price">
+                        <input type="text" id="serviceDuration" placeholder="Duration">
+                        <textarea id="serviceDescription" placeholder="Description"></textarea>
+                    </div>
+                    <button id="addServiceBtn" class="primary-btn">Add Service</button>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Services Table</h3>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Service Name</th>
+                                    <th>Price</th>
+                                    <th>Duration</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="servicesContainer">
+                                <tr>
+                                    <td colspan="5" class="empty-state">
+                                        No services found.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="gallery" class="content-section">
+                <div class="page-header">
+                    <h1>Gallery</h1>
+                    <p>Upload and manage project images.</p>
+                </div>
+
+                <div class="form-card">
+                    <h3>Add Gallery Item</h3>
+                    <div class="form-grid">
+                        <input type="text" id="galleryTitle" placeholder="Title">
+                        <input type="file" id="galleryFile" accept="image/*">
+                        <textarea id="galleryDescription" placeholder="Description"></textarea>
+                    </div>
+                    <button id="addGalleryBtn" class="primary-btn">Upload Gallery Item</button>
+                </div>
+
+                <div id="galleryContainer" class="cards-grid"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- EDIT MODAL -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Edit Item</h3>
+                <button id="closeModal" class="icon-btn">&times;</button>
+            </div>
+            <div id="modalBody" class="modal-body"></div>
+            <div class="modal-footer">
+                <button id="saveModalBtn" class="primary-btn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery | JC Monsanto Auto Paintworks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">JC Monsanto Auto Paintworks</div>
+
+        <button class="menu-btn" id="menuBtn">☰</button>
+
+        <nav id="navLinks">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('services') }}">Services</a>
+            <a href="{{ url_for('gallery') }}" class="active">Gallery</a>
+            <a href="{{ url_for('booking') }}">Book</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('login') }}" class="admin-link">Admin</a>
+        </nav>
+    </header>
+
+    <main class="page-wrapper">
+
+        <section class="hero-section small-hero">
+            <div class="hero-card">
+                <div class="hero-badge">Our Work Showcase</div>
+                <h1>Project Gallery</h1>
+                <p>
+                    A collection of sample paintworks, body restoration, and finishing
+                    projects completed by JC Monsanto Auto Paintworks.
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Featured Projects</h2>
+                <p>Showcase your best before-and-after work, repaint jobs, and custom finishes here.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-card">
+                    <div class="gallery-image placeholder-box">Project Image 1</div>
+                    <div class="gallery-content">
+                        <h3>Full Repaint Project</h3>
+                        <p>Complete repaint with smooth premium gloss finish and restored body appearance.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <div class="gallery-image placeholder-box">Project Image 2</div>
+                    <div class="gallery-content">
+                        <h3>Scratch Repair Work</h3>
+                        <p>Panel scratch correction and repaint blending for a clean repaired surface.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <div class="gallery-image placeholder-box">Project Image 3</div>
+                    <div class="gallery-content">
+                        <h3>Motorcycle Custom Paint</h3>
+                        <p>Refinished motorcycle body parts with bold color refresh and polished output.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <div class="gallery-image placeholder-box">Project Image 4</div>
+                    <div class="gallery-content">
+                        <h3>Bumper Restoration</h3>
+                        <p>Damaged bumper repaired and repainted to match the original body color.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <div class="gallery-image placeholder-box">Project Image 5</div>
+                    <div class="gallery-content">
+                        <h3>Detail Finishing</h3>
+                        <p>Fine finishing work focused on shine, paint consistency, and final presentation.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <div class="gallery-image placeholder-box">Project Image 6</div>
+                    <div class="gallery-content">
+                        <h3>Color Restoration</h3>
+                        <p>Old paint revived with restoration work for a cleaner and fresher look.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="cta-card">
+                <h2>Want your vehicle to look like this?</h2>
+                <p>Book an appointment and let us bring back a clean, premium finish.</p>
+                <a href="{{ url_for('booking') }}" class="btn btn-primary">Book Now</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 JC Monsanto Auto Paintworks. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

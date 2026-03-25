@@ -1,0 +1,101 @@
+.booking-form-wrap {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.booking-form {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 22px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    display: grid;
+    gap: 18px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+    width: 100%;
+    padding: 15px 16px;
+    border: 1px solid #d7dee7;
+    border-radius: 14px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.12);
+}
+
+.booking-form textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.booking-form button {
+    background: #f59e0b;
+    color: #0f172a;
+    border: none;
+    padding: 15px 18px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.booking-form button:hover {
+    background: #e48a00;
+}
+
+.booking-form button:active {
+    transform: scale(0.99);
+}
+
+.booking-message {
+    min-height: 24px;
+    font-weight: 700;
+    color: #334155;
+}
+
+.booking-message.success {
+    color: #15803d;
+}
+
+.booking-message.error {
+    color: #dc2626;
+}
+
+.form-message {
+  margin-top: 16px;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.form-message.success {
+  color: #16a34a;
+}
+
+.form-message.error {
+  color: #dc2626;
+}
+
+@media (max-width: 768px) {
+    .booking-form {
+        padding: 22px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
