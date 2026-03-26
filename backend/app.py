@@ -1,9 +1,25 @@
 from flask import Flask, render_template
 from flask import request, redirect, url_for
+import os
+import json
+from firebase_admin import credentials
 import firebase_admin
 from firebase_admin import credentials, firestore
 import cloudinary
 import cloudinary.uploader
+
+firebase_json = os.environ.get("FIREBASE_KEY")
+
+if not firebase_json:
+    raise ValueError("FIREBASE_KEY not set")
+
+cred_dict = json.loads(firebase_json)
+cred = credentials.Certificate(cred_dict)
+
+# 🔥 ADD THIS LINE
+firebase_admin.initialize_app(cred)
+
+db = firestore.client()
 
 cloudinary.config(
     cloud_name="dci3ptl9x",
@@ -13,10 +29,10 @@ cloudinary.config(
 
 
 # Initialize Firebase
-cred = credentials.Certificate("serviceAccountKey.json")
-firebase_admin.initialize_app(cred)
 
-db = firestore.client()
+
+
+
 
 app = Flask(__name__)
 
