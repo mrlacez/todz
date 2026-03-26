@@ -657,6 +657,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function saveModalChanges() {
+    console.log("Editing state:", state.editing);
     const { type, id, imagePath } = state.editing;
     if (!type || !id) return;
 
@@ -888,6 +889,45 @@ onAuthStateChanged(auth, (user) => {
     window.location.href = "/";
   }
 });
+
+
+
+
+
+
+
+
+const imageInput = document.getElementById("imageInput");
+const preview = document.getElementById("previewImage");
+
+imageInput?.addEventListener("change", () => {
+    const file = imageInput.files[0];
+
+    if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+    }
+});
+
+
+
+
+
+document.querySelectorAll(".edit-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const id = btn.dataset.id;
+
+    // 🔥 FORCE SET
+    state.editing.type = "gallery";
+    state.editing.id = id;
+
+    // OPTIONAL: if not using Firebase gallery list
+    state.editing.imagePath = null;
+
+    openEditModal("gallery", id);
+  });
+});
+
 
 
 

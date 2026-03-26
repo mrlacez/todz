@@ -567,3 +567,122 @@ body {
         width: 100%;
     }
 }
+
+
+
+
+
+
+
+/* ================= ULTRA PREMIUM LOADER ================= */
+
+#ultra-loader {
+    position: fixed;
+    inset: 0;
+    background: rgba(238, 242, 246, 0.85); /* matches your bg */
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#ultra-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* BOX */
+.ultra-loader-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow);
+    padding: 40px 50px;
+    text-align: center;
+    animation: fadeIn 0.6s ease;
+}
+
+/* LOGO */
+.ultra-logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--accent);
+    margin-bottom: 18px;
+}
+
+/* SPINNER */
+.ultra-spinner {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    border: 4px solid #e2e8f0;
+    border-top: 4px solid var(--accent);
+    animation: spin 0.9s linear infinite;
+}
+
+/* TEXT */
+.ultra-text {
+    font-size: 0.95rem;
+    color: var(--text-soft);
+    font-weight: 600;
+}
+
+/* ANIMATION */
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
+
+/* ================= OFFLINE POPUP ================= */
+
+#offline-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+}
+
+#offline-popup.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* BOX */
+.offline-box {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 16px 22px;
+    text-align: center;
+    min-width: 260px;
+}
+
+/* TITLE */
+.offline-box h3 {
+    color: #dc2626; /* red warning */
+    font-size: 1rem;
+    margin-bottom: 6px;
+}
+
+/* TEXT */
+.offline-box p {
+    font-size: 0.9rem;
+    color: var(--text-soft);
+}

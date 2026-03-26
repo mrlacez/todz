@@ -1,4 +1,22 @@
 from flask import Flask, render_template
+from flask import request, redirect, url_for
+import firebase_admin
+from firebase_admin import credentials, firestore
+import cloudinary
+import cloudinary.uploader
+
+cloudinary.config(
+    cloud_name="dci3ptl9x",
+    api_key="324354639345435",
+    api_secret="NkLemfGdS4QAxHXV6NJ75JMJ7Ec"
+)
+
+
+# Initialize Firebase
+cred = credentials.Certificate("serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+
+db = firestore.client()
 
 app = Flask(__name__)
 
@@ -10,9 +28,17 @@ def index():
 def services():
     return render_template("services.html")
 
-@app.route("/gallery")
+@app.route('/gallery')
 def gallery():
-    return render_template("gallery.html")
+    docs = db.collection('gallery').stream()
+
+    gallery_data = []
+    for doc in docs:
+        data = doc.to_dict()
+        data['id'] = doc.id  # ✅ ADD THIS LINE
+        gallery_data.append(data)
+
+    return render_template('gallery.html', gallery_data=gallery_data)
 
 @app.route("/booking")
 def booking():
@@ -34,9 +60,70 @@ def contact():
 def login():
     return render_template("login.html")
 
-@app.route("/admin")
+@app.route('/admin')
 def admin():
-    return render_template("admin.html")
+    docs = db.collection('gallery').stream()
+
+    gallery_data = []
+    for doc in docs:
+        data = doc.to_dict()
+        data['id'] = doc.id  # ✅ ADD THIS LINE
+        gallery_data.append(data)
+
+    return render_template('admin.html', gallery_data=gallery_data)
+
+
+
+@app.route('/upload-gallery', methods=['POST'])
+def upload_gallery():
+    file = request.files['image']
+    title = request.form['title']
+    description = request.form['description']
+
+    result = cloudinary.uploader.upload(file)
+    image_url = result['secure_url']
+
+    db.collection('gallery').add({
+        'title': title,
+        'description': description,
+        'image': image_url
+    })
+
+    return redirect('/admin')
+
+
+@app.route('/delete-gallery', methods=['POST'])
+def delete_gallery():
+    image_url = request.form['image']
+
+    docs = db.collection('gallery').stream()
+
+    for doc in docs:
+        if doc.to_dict().get('image') == image_url:
+            db.collection('gallery').document(doc.id).delete()
+
+    return redirect('/admin')
+
+
+
+@app.route('/edit-gallery', methods=['POST'])
+def edit_gallery():
+    data = request.get_json()
+
+    image_url = data['image']
+    new_title = data['title']
+    new_description = data['description']
+
+    docs = db.collection('gallery').stream()
+
+    for doc in docs:
+        if doc.to_dict().get('image') == image_url:
+            db.collection('gallery').document(doc.id).update({
+                'title': new_title,
+                'description': new_description
+            })
+
+    return {'status': 'success'}
 
 if __name__ == "__main__":
     app.run(debug=True)

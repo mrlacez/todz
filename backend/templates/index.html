@@ -107,5 +107,71 @@
     </footer>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+
+    <div id="ultra-loader">
+        <div class="ultra-loader-box">
+
+            <div class="ultra-logo">JC Monsanto</div>
+
+            <div class="ultra-spinner"></div>
+
+            <p class="ultra-text">Loading your experience...</p>
+
+        </div>
+    </div>
+
+    <div id="offline-popup">
+        <div class="offline-box">
+            <h3>No Internet Connection</h3>
+            <p>Please check your connection. Some features may not work.</p>
+        </div>
+    </div>
+
+
+<script>
+    const loader = document.getElementById("ultra-loader");
+
+    // Hide loader when page fully loads
+    window.addEventListener("load", () => {
+        setTimeout(() => {
+            loader.classList.add("hidden");
+        }, 400); // smooth exit
+    });
+
+    // Show loader when clicking links
+    document.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            loader.classList.remove("hidden");
+        });
+    });
+
+    // Show loader on form submit (booking/contact)
+    document.querySelectorAll("form").forEach(form => {
+        form.addEventListener("submit", () => {
+            loader.classList.remove("hidden");
+        });
+    });
+</script>
+
+<script>
+    const offlinePopup = document.getElementById("offline-popup");
+
+    // Check immediately on page load
+    if (!navigator.onLine) {
+        offlinePopup.classList.add("show");
+    }
+
+    // Detect when user goes offline
+    window.addEventListener("offline", () => {
+        offlinePopup.classList.add("show");
+    });
+
+    // Detect when back online
+    window.addEventListener("online", () => {
+        offlinePopup.classList.remove("show");
+    });
+</script>
+
 </body>
 </html>

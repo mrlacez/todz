@@ -283,15 +283,54 @@
 
                 <div class="form-card">
                     <h3>Add Gallery Item</h3>
-                    <div class="form-grid">
-                        <input type="text" id="galleryTitle" placeholder="Title">
-                        <input type="file" id="galleryFile" accept="image/*">
-                        <textarea id="galleryDescription" placeholder="Description"></textarea>
-                    </div>
-                    <button id="addGalleryBtn" class="primary-btn">Upload Gallery Item</button>
+
+                    <form action="/upload-gallery" method="POST" enctype="multipart/form-data">
+                        <div class="form-grid">
+
+                            <input type="text" name="title" placeholder="Title" required>
+
+                            <input type="file" name="image" id="imageInput" required>
+                            <img id="previewImage" style="display:none; margin-top:10px; max-height:150px; border-radius:10px;">
+
+                            <textarea name="description" placeholder="Description"></textarea>
+
+                        </div>
+
+                        <button type="submit" class="primary-btn">Upload Gallery Item</button>
+                    </form>
                 </div>
 
-                <div id="galleryContainer" class="cards-grid"></div>
+                <div class="cards-grid">
+
+                    {% for item in gallery_data %}
+                    <div class="gallery-card">
+
+                        <img src="{{ item.image }}" class="gallery-image">
+
+                        <div class="gallery-content">
+                            <h3>{{ item.title }}</h3>
+                            <p>{{ item.description }}</p>
+
+                            <div class="actions">
+                               <button 
+                                    class="edit-btn"
+                                    data-action="edit-gallery"
+                                    data-id="{{ item.id }}">
+                                    Edit
+                                </button>
+
+                                <form action="/delete-gallery" method="POST"
+                                    onsubmit="return confirm('Delete this image?')">
+                                    <input type="hidden" name="image" value="{{ item.image }}">
+                                    <button class="delete-btn">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+
+                </div>
             </section>
         </main>
     </div>
@@ -310,6 +349,6 @@
         </div>
     </div>
 
-    <script type="module" src="{{ url_for('static', filename='js/admin.js') }}"></script>
+   <script type="module" src="{{ url_for('static', filename='js/admin.js') }}"></script> 
 </body>
 </html>

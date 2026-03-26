@@ -42,55 +42,22 @@
                 <p>Showcase your best before-and-after work, repaint jobs, and custom finishes here.</p>
             </div>
 
+            <!-- ✅ REPLACED HERE -->
             <div class="gallery-grid">
+                {% for item in gallery_data %}
                 <div class="gallery-card">
-                    <div class="gallery-image placeholder-box">Project Image 1</div>
-                    <div class="gallery-content">
-                        <h3>Full Repaint Project</h3>
-                        <p>Complete repaint with smooth premium gloss finish and restored body appearance.</p>
-                    </div>
-                </div>
 
-                <div class="gallery-card">
-                    <div class="gallery-image placeholder-box">Project Image 2</div>
-                    <div class="gallery-content">
-                        <h3>Scratch Repair Work</h3>
-                        <p>Panel scratch correction and repaint blending for a clean repaired surface.</p>
-                    </div>
-                </div>
+                    <img src="{{ item.image }}" class="gallery-image">
 
-                <div class="gallery-card">
-                    <div class="gallery-image placeholder-box">Project Image 3</div>
                     <div class="gallery-content">
-                        <h3>Motorcycle Custom Paint</h3>
-                        <p>Refinished motorcycle body parts with bold color refresh and polished output.</p>
+                        <h3>{{ item.title }}</h3>
+                        <p>{{ item.description }}</p>
                     </div>
-                </div>
 
-                <div class="gallery-card">
-                    <div class="gallery-image placeholder-box">Project Image 4</div>
-                    <div class="gallery-content">
-                        <h3>Bumper Restoration</h3>
-                        <p>Damaged bumper repaired and repainted to match the original body color.</p>
-                    </div>
                 </div>
-
-                <div class="gallery-card">
-                    <div class="gallery-image placeholder-box">Project Image 5</div>
-                    <div class="gallery-content">
-                        <h3>Detail Finishing</h3>
-                        <p>Fine finishing work focused on shine, paint consistency, and final presentation.</p>
-                    </div>
-                </div>
-
-                <div class="gallery-card">
-                    <div class="gallery-image placeholder-box">Project Image 6</div>
-                    <div class="gallery-content">
-                        <h3>Color Restoration</h3>
-                        <p>Old paint revived with restoration work for a cleaner and fresher look.</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
+
         </section>
 
         <section class="content-section">
